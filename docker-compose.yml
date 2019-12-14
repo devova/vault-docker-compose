@@ -6,7 +6,7 @@ services:
     image: bitnami/postgresql:11
     restart: always
     ports:
-      - 5432:5432
+      - 5440:5432
     volumes:
       - ./deployment/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
@@ -29,6 +29,14 @@ services:
       - IPC_LOCK
     networks:
       - back-tier
+
+  spring:
+    image: hyness/spring-cloud-config-server:latest
+    restart: always
+    ports:
+      - 8888:8888
+    volumes:
+      - ./deployment/spring.config.yml:/config/application.yml
 
 networks:
   back-tier:
