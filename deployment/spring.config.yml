@@ -6,5 +6,5 @@ spring:
             uri: https://github.com/devova/vault-docker-compose
             search-paths: 'config/{application}'
             cloneOnStart: true
----
-def-key: 1
+
+defkey: 1
