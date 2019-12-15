@@ -1,6 +1,7 @@
 spring:
     cloud:
       config:
+        overrideNone: true
         server:
           git:
             uri: https://github.com/devova/vault-docker-compose
