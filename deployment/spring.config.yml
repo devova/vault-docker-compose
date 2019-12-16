@@ -1,9 +1,9 @@
 spring:
+    config:
+      name: defaults
     cloud:
       config:
-        overrideNone: true
         server:
           git:
             uri: https://github.com/devova/vault-docker-compose
-            # search-paths: 'config/{application}'
-            cloneOnStart: true
+            search-paths: 'config/'
