@@ -1,9 +1,9 @@
 spring:
+  cloud:
     config:
-      name: defaults
-    cloud:
-      config:
-        server:
-          git:
-            uri: https://github.com/devova/vault-docker-compose
-            search-paths: 'config/'
+      server:
+        git:
+          uri: https://github.com/devova/vault-docker-compose
+          search-paths:
+            - 'config/{application}/'
+            - 'config/'
