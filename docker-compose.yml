@@ -1,42 +1,13 @@
 version: '3.1'
 
 services:
-
-  postgres:
-    image: bitnami/postgresql:11
-    restart: always
-    ports:
-      - 5440:5432
-    volumes:
-      - ./deployment/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_DATABASE=vault
-    networks:
-      - back-tier
-  
-  vault:
-    image: vault:latest
-    restart: always
-    ports:
-      - 8200:8200
-    volumes:
-      - ./deployment/vault.config:/vault/config/local
-    depends_on:
-      - postgres
-    cap_add:
-      - IPC_LOCK
-    networks:
-      - back-tier
-
   spring:
     image: hyness/spring-cloud-config-server:latest
     restart: always
     ports:
       - 8888:8888
-    volumes:
-      - ./deployment/spring.config.yml:/config/application.yml
-
-networks:
-  back-tier:
+    environment:
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/devova/vault-docker-compose
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCH_PATHS=config/{application}/,config/
+#    volumes:
+#      - ./deployment/spring.config.yml:/config/application.yml
